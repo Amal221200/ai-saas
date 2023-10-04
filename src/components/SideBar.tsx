@@ -5,6 +5,7 @@ import { CodeIcon, ImageIcon, LayoutDashboard, MessageSquare, MusicIcon, Setting
 import { Montserrat } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const montserrat = Montserrat({
     weight: '600',
@@ -40,7 +41,7 @@ const routes = [
         label: "Music Generation",
         icon: MusicIcon,
         href: '/music',
-        color: 'text-emrald-500'
+        color: 'text-emerald-500'
     },
     {
         label: "Code Generation",
@@ -56,7 +57,7 @@ const routes = [
 ];
 
 const SideBar = () => {
-
+    const pathName = usePathname()
     return (
         <div className="space-y-4 py-4 flex flex-col bg-[#111827] text-white h-full">
             <div className="px-3 py-2 flex-1">
@@ -69,7 +70,7 @@ const SideBar = () => {
                 <div className="space-y-1">
                     {
                         routes.map((route) => (
-                            <Link key={route.label} href={route.href} className="text-sm group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-white hover:bg-white/10 rounded-lg transition">
+                            <Link key={route.label} href={route.href} className={cn("text-sm group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-white hover:bg-white/10 rounded-lg transition", route.href === pathName ? 'text-white bg-white/10': 'text-zinc-400')}>
                                 <div className="flex items-center flex-1">
                                     <route.icon className={cn('h-5 w-5 mr-3', route?.color)} />
                                     {route.label}
