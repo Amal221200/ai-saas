@@ -1,10 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@clerk/nextjs';
 import Openai from 'openai';
+import { ChatCompletionMessage } from 'openai/resources/chat/index.mjs';
 
 const openai = new Openai({
     apiKey: process.env.OPENAI_API_KEY,
 })
+
+const instructionMessage: ChatCompletionMessage = {
+    role: "system",
+    content: "You are a code generator. You must answer only in markdown code snippets. Use code comments for explanation."
+}
 
 export const POST = async (request: NextRequest) => {
 
@@ -33,7 +39,7 @@ export const POST = async (request: NextRequest) => {
 
         const response = await openai.chat.completions.create({
             model: 'gpt-3.5-turbo',
-            messages
+            messages: [instructionMessage, ...messages]
         })
 
         return NextResponse.json(response.choices[0].message, {
@@ -41,7 +47,7 @@ export const POST = async (request: NextRequest) => {
         })
 
     } catch (error) {
-        console.log("[CONVERSATION_ERROR]", error);
+        console.log("[CODE_ERROR]", error);
         return NextResponse.json("Internal Error", {
             status: 500
         })

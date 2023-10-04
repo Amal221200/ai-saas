@@ -90,7 +90,7 @@ const ConversationPage = () => {
                                 <div className='flex items-center justify-center p-8 rounded-lg w-full bg-muted'>
                                     <Loader />
                                 </div>
-                            ): <></>
+                            ) : <></>
                         }
 
                         {
