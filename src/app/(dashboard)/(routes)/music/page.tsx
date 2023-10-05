@@ -2,15 +2,12 @@
 
 import * as z from 'zod';
 import axios from 'axios';
-import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
-import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '@/components/ui/select';
-import { Card, CardFooter } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
@@ -18,8 +15,8 @@ import Heading from "@/components/Headng";
 import Empty from '@/components/Empty';
 import Loader from '@/components/Loader';
 
-import { amountOptions, formSchema, resolutionOptions } from "./constants";
-import { Download, Music } from 'lucide-react';
+import { formSchema } from "./constants";
+import { Music } from 'lucide-react';
 
 const MusicPage = () => {
     const router = useRouter();
@@ -29,8 +26,6 @@ const MusicPage = () => {
         resolver: zodResolver(formSchema),
         defaultValues: {
             prompt: "",
-            amount: "1",
-            resolution: "512x512"
         }
     });
 
@@ -56,7 +51,7 @@ const MusicPage = () => {
 
     return (
         <div>
-            <Heading title="Music Generation" description="Turn your prompt into an music." icon={Music} iconColor="text-emerald-500" bgColor="bg-emerald-500/10" />
+            <Heading title="Music Generation" description="Turn your prompt into a music." icon={Music} iconColor="text-emerald-500" bgColor="bg-emerald-500/10" />
 
             <div className="px-4 lg:px-8">
                 <div>
