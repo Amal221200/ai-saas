@@ -65,56 +65,10 @@ const MusicPage = () => {
                             className='rounded-lg border w-full p-4 px-3 md:px-6 focus-within:shadow-sm grid grid-cols-12 gap-2'>
                             <FormField control={form.control} name='prompt'
                                 render={({ field }) => (
-                                    <FormItem className='col-span-12 lg:col-span-6'>
+                                    <FormItem className='col-span-12 lg:col-span-10'>
                                         <FormControl className='m-0 p-0'>
                                             <Input placeholder='Piano solo' className='border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent' disabled={isSubmitting} {...field} />
                                         </FormControl>
-                                    </FormItem>
-                                )} />
-                            <FormField control={form.control} name='amount'
-                                render={({ field }) => (
-                                    <FormItem className='col-span-12 lg:col-span-2'>
-                                        <Select disabled={isSubmitting} onValueChange={field.onChange}
-                                            value={field.value}
-                                            defaultValue={field.value}>
-                                            <FormControl>
-                                                <SelectTrigger>
-                                                    <SelectValue defaultValue={field.value} />
-                                                </SelectTrigger>
-                                            </FormControl>
-                                            <SelectContent>
-                                                {
-                                                    amountOptions.map((option) => (
-                                                        <SelectItem key={option.value} value={option.value}>
-                                                            {option.label}
-                                                        </SelectItem>
-                                                    ))
-                                                }
-                                            </SelectContent>
-                                        </Select>
-                                    </FormItem>
-                                )} />
-                            <FormField control={form.control} name='resolution'
-                                render={({ field }) => (
-                                    <FormItem className='col-span-12 lg:col-span-2'>
-                                        <Select disabled={isSubmitting} onValueChange={field.onChange}
-                                            value={field.value}
-                                            defaultValue={field.value}>
-                                            <FormControl>
-                                                <SelectTrigger>
-                                                    <SelectValue defaultValue={field.value} />
-                                                </SelectTrigger>
-                                            </FormControl>
-                                            <SelectContent>
-                                                {
-                                                    resolutionOptions.map((option) => (
-                                                        <SelectItem key={option.value} value={option.value}>
-                                                            {option.label}
-                                                        </SelectItem>
-                                                    ))
-                                                }
-                                            </SelectContent>
-                                        </Select>
                                     </FormItem>
                                 )} />
                             <Button type='submit' className='col-span-12 lg:col-span-2 w-full' disabled={isSubmitting}>
