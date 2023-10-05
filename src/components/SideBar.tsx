@@ -7,6 +7,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import FreeCounter from "@/components/FreeCounter";
+
 const montserrat = Montserrat({
     weight: '600',
     subsets: ['latin']
@@ -56,8 +58,13 @@ const routes = [
     }
 ];
 
-const SideBar = () => {
+interface SideBarProps {
+    apiLimitCount: number,
+}
+
+const SideBar: React.FC<SideBarProps> = ({ apiLimitCount = 0 }) => {
     const pathName = usePathname()
+
     return (
         <div className="space-y-4 py-4 flex flex-col bg-[#111827] text-white h-full">
             <div className="px-3 py-2 flex-1">
@@ -70,7 +77,7 @@ const SideBar = () => {
                 <div className="space-y-1">
                     {
                         routes.map((route) => (
-                            <Link key={route.label} href={route.href} className={cn("text-sm group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-white hover:bg-white/10 rounded-lg transition", route.href === pathName ? 'text-white bg-white/10': 'text-zinc-400')}>
+                            <Link key={route.label} href={route.href} className={cn("text-sm group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-white hover:bg-white/10 rounded-lg transition", route.href === pathName ? 'text-white bg-white/10' : 'text-zinc-400')}>
                                 <div className="flex items-center flex-1">
                                     <route.icon className={cn('h-5 w-5 mr-3', route?.color)} />
                                     {route.label}
@@ -80,6 +87,7 @@ const SideBar = () => {
                     }
                 </div>
             </div>
+            <FreeCounter apiLimitCount={apiLimitCount} />
         </div>);
 }
 
