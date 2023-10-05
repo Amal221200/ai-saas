@@ -95,7 +95,7 @@ const CodePage = () => {
 
                         {
                             messages.length === 0 && !isSubmitting && (
-                                <Empty label='No conversation started' />
+                                <Empty label='No code generated' />
                             )
                         }
 

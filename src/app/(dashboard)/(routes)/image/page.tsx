@@ -9,7 +9,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
-import { Select, SelectTrigger, SelectContent, SelectGroup, SelectLabel, SelectItem, SelectValue } from '@/components/ui/select';
+import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '@/components/ui/select';
 import { Card, CardFooter } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -18,7 +18,6 @@ import Heading from "@/components/Headng";
 import Empty from '@/components/Empty';
 import Loader from '@/components/Loader';
 
-import { cn } from '@/lib/utils';
 import { amountOptions, formSchema, resolutionOptions } from "./constants";
 import { Download, ImageIcon } from 'lucide-react';
 
@@ -135,7 +134,7 @@ const ImagePage = () => {
 
                         {
                             images.length === 0 && !isSubmitting && (
-                                <Empty label='No conversation started' />
+                                <Empty label='No images generated' />
                             )
                         }
                         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-8'>

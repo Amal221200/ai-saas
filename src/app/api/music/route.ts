@@ -1,9 +1,14 @@
+import Openai from 'openai';
+import Replicate from 'replicate';
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@clerk/nextjs';
-import Openai from 'openai';
 
 const openai = new Openai({
     apiKey: process.env.OPENAI_API_KEY,
+})
+
+const replicate = new Replicate({
+    auth: process.env.REPLICATE_API_KEY
 })
 
 export const POST = async (request: NextRequest) => {
@@ -16,7 +21,7 @@ export const POST = async (request: NextRequest) => {
             })
         }
 
-        if (!openai.apiKey) {
+        if (!replicate.auth) {
             return NextResponse.json("OpenAI API Key not configured", {
                 status: 500
             })
@@ -31,18 +36,23 @@ export const POST = async (request: NextRequest) => {
             })
         }
 
-        const response = await openai.images.generate({
-            prompt,
-            size: resolution,
-            n: parseInt(amount, 10)
-        })
 
-        return NextResponse.json(response.data, {
+
+        const response = await replicate.run(
+            "riffusion/riffusion:8cf61ea6c56afd61d8f5b9ffd14d7c216c0a93844ce2d82ac1c9ecc9c7f24e05",
+            {
+                input: {
+                    prompt_a: prompt
+                }
+            }
+        );
+
+        return NextResponse.json(response, {
             status: 201
         })
 
     } catch (error) {
-        console.log("[IMAGE_ERROR]", error);
+        console.log("[MUSIC_ERROR]", error);
         return NextResponse.json("Internal Error", {
             status: 500
         })
